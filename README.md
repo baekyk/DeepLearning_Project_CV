@@ -4,7 +4,7 @@
 
 <br>
 
-![image](https://user-images.githubusercontent.com/86671456/171619107-8d5506bf-349e-4163-9694-c3ad99adac9d.png)
+![image](https://miro.medium.com/max/1400/1*CnNorCR4Zdq7pVchdsRGyw.png)
 
 
 ## 주제 : Pokemon type Classification

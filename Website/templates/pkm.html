@@ -24,12 +24,27 @@
         <div class="mb-3 row">
             <div class="col-md-1"></div>
             <div class="col-md-4">
-                <h1>Classification Type</h1>
-                <form action="pktype" class="dropzone">
+                <h1>Type Classification</h1>
+                <form action="pktype" class="dropzone" method="post" enctype="multipart/form-data" id="file", name="file">
+                </form>
+
+                <form action="pktype" method="post" enctype="multipart/form-data">
+                    <input type="file" id="file" name="file">
                     <button type="submit" >submit</button>
                 </form>
-            
+
                 <br><br>
+                <p>
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        <ul>
+                        {% for message in messages %}
+                          <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+                </p>
                 {% if output %}
                 <h6><ul>Your Poketmon Type : {{output}}</ul></h6>
                 {% else %}

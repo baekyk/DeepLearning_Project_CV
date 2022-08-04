@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script> -->
   
 </head>
 
@@ -20,56 +20,86 @@
         <p style="text-align:center;">
         <img src="../static/logo.jpeg" alt="no image" class="center" width="650" height="250">
         </p>
-        <br><br>
+        <br>
         <div class="mb-3 row">
-            <div class="col-md-1"></div>
-            <div class="col-md-4">
-                <h1>Type Classification</h1>
-                <form action="pktype" class="dropzone" method="post" enctype="multipart/form-data" id="file", name="file">
-                </form>
+          <div class="col-md-4">
+              <h1>Type Classification</h1>
+              <!-- <form action="pktype" class="dropzone" method="post" enctype="multipart/form-data" id="file", name="file">
+              </form> -->
 
-                <form action="pktype" method="post" enctype="multipart/form-data">
-                    <input type="file" id="file" name="file">
-                    <button type="submit" >submit</button>
-                </form>
+              <form action="pktype" method="post" enctype="multipart/form-data" class="dropzone">
+                  <p><br></p>
+                  <input type="file" id="file" name="file">
+                  <button type="submit" >Submit</button>
+              </form>
+          </div>
 
-                <br><br>
-                <p>
-                    {% with messages = get_flashed_messages() %}
-                      {% if messages %}
-                        <ul>
-                        {% for message in messages %}
-                          <li>{{ message }}</li>
-                        {% endfor %}
-                        </ul>
-                      {% endif %}
-                    {% endwith %}
-                </p>
-                {% if output %}
-                <h6><ul>Your Poketmon Type : {{output}}</ul></h6>
-                {% else %}
-                <h6><ul>Please Input Poketmon!</ul></h6>
-                {% endif %}
-            </div>
+          <div class="col-md-4">
+            <h1>Auto Encoder</h1>
+            <!-- <form action="{{ url_for('autoencoder') }}" class="dropzone">
+            </form> -->
 
+              <form action="encode" method="post" enctype="multipart/form-data" class="dropzone">
+                <p>color to sketch</p>
+                <input type="file" id="file" name="file">
+                <button type="submit" >Sketch</button>
+              </form>
 
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <h1>Auto Encoder</h1>
-                <form action="{{ url_for('auto') }}" class="dropzone">
-                    <button type="submit" >submit</button>
-                </form>
-                <br><br>
-                {% if output2 %}
-                <h6><ul>Poketmon you've sketched</ul></h6>
-                {% else %}
-                <h6><ul>Please Input sketch!</ul></h6>
-                {% endif %}
-                
-            </div>
+          </div>
 
+          <div class="col-md-4">
+            <h1><br></h1>
+            <form action="decode" method="post" enctype="multipart/form-data" class="dropzone">
+              <p>sketch to color</p>
+              <input type="file" id="file" name="file">
+              <button type="submit" >Paint</button>
+            </form>
+          </div>
+      </div>
+
+              <br>
+              <p>
+                  {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                      <ul>
+                      {% for message in messages %}
+                        <li>{{ message }}</li>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                  {% endwith %}
+              </p>
+
+      <div class="mb-3 row">
+        <div class="col-md-4">
+              {% if output and output1 %}
+              <h6><ul>Your Poketmon Type : {{output}}</ul></h6>
+              {% else %}
+              <h6><ul>Please Input Poketmon!</ul></h6>
+              {% endif %}
         </div>
+
+        <div class="col-md-4">
+              {% if output2 or output3 %}
+              <h6><ul>Sketch Image!</ul></h6>
+              <img class="img-responsive" src="{{url_for('static', filename= output2 ) }}" alt="No image">
+              {% else %}
+              <h6><ul>Please Input Image!</ul></h6>
+              {% endif %}
+        </div>
+
+        <div class="col-md-4">
+              {% if output3 %}
+              <h6><ul>Painted Image!</ul></h6>
+              <img class="img-responsive" src="{{url_for('static', filename= output3 ) }}" alt="No image">
+              {% else %}
+              <h6><ul></ul></h6>
+              {% endif %}
+        </div>
+      </div>
+
     </div>
+      
 </body>
 
 

@@ -138,8 +138,9 @@ def decoder():
             # origin = np.array([origin])
 
             sketch = cv2.imread(os.path.join('./static/', origin_name))
+            sketch = cv2.cvtColor(sketch,cv2.COLOR_BGR2RGB)
+            sketch = sketch.astype('float32')/255.
             sketch = tf.expand_dims(sketch, axis=0)
-            # sketch = sketch.astype('float32')/255.
             model = tf.keras.models.load_model('../auto_encoder.hdf5')
             result = model.predict(sketch)
             # autoencoder = model_autoencoder.model_auto()

@@ -77,7 +77,7 @@ def pktype():
             type_pred = types(type_pred)
             img = upload_name
             
-            return render_template('pkm.html', output=type_pred, output1=img) , delete()
+            return render_template('pkm.html', output=type_pred) , delete()
         else:
             flash('Allowed image types are -> png, jpg, jpeg')
             return redirect(request.url)
